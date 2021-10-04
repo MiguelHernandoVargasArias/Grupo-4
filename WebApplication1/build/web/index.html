@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>EASY PARKING</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!--//Bootstrap core CSS--> 
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <!--Angular--> 
+        <script src = "angular/angular.min.js"></script>  
+        <style>
+            /*div {border-style: dotted; }*/
+        </style>
+    </head>
+    <body class="p-3 mb-2 bg-info text-dark">
+        
+        <h1 class="text-center">CONTROL DE INGRESO DE VEHICULOS - "EASY PARKING"</h1>
+        <div class="container-fluid" ng-app="demoapp" ng-controller="appController as app">
+            <div class="row">
+                <!--seccion 1-->
+                <div class="col-6">
+                    <h4 class="text-center ">INGRESAR DATOS</h4>
+                    <div class="row">
+                        <div class="col-12">
+                            <label class="text-center">CEDULA</label>
+                            <input class="form-control" type="number" ng-model="app.cedula">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <label class="text-center">NOMBRE</label>
+                            <input class="form-control" type="text" ng-model="app.nombre">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label class="text-center">TIPO DE VEHICULO</label>
+                            <select class="form-control" ng-model="app.tipoVehiculo">
+                                <option>MOTO</option>
+                                <option>COCHE</option>
+                                <option>BUS</option>
+                                <option>CAMIONETA</option>
+                            </select>
+
+                        </div>
+                        <div class="col-6">
+                            <label class="text-center">PLACA DE VEHICULO</label>
+                            <input class="form-control" type="text" ng-model="app.placaVehiculo">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label class="text-center">COLOR DEL VEHICULO</label>
+                            <input class="form-control" type="text" ng-model="app.colorVehiculo">
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label class="text-center">NUMERO DE PLAZA</label>
+                            <input class="form-control" type="number" ng-model="app.plaza">
+                        </div>
+                        <div class="col-3">
+                            <div class="col-1"><button type="button" class="btn btn-outline-dark" ng-click="app.guardar()">GUARDAR</button></div>
+                            <div class="col-3">  _____________________________   </div>
+                            <div class="col-1"><button type="button" class="btn btn-outline-dark" ng-click="app.listar()">LISTAR</button></div>
+
+                        </div>
+                        <div class="col-3">
+                            <div class="col-3"><button type="button" class="btn btn-outline-dark" ng-click="app.actualizar()">ACTUALIZAR</button></div>
+                            <div class="col-3">  ___________________  </div>
+                            <div class="col-3"><button type="button" class="btn btn-outline-dark" ng-click="app.eliminar()">ELIMINAR</button></div>
+
+                        </div>
+                    </div> 
+                    <div class="row">
+                    </div>
+
+                </div>
+                <!--seccion 2-->
+                <div class="col-6">
+                    <h4 class="text-center">CONFIRMAR DATOS</h4>
+                    <div class="row">
+                        <div class="col-12">
+                            <label class="text-center">CEDULA</label>
+                            <input class="form-control" type="text" disabled="" value="{{app.cedula}}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <label class="text-center">NOMBRE</label>
+                            <input class="form-control" type="text" disabled="" value="{{app.nombre}}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label class="text-center">TIPO DE VEHICULO</label>
+                            <input class="form-control" type="text" disabled="" value="{{app.tipoVehiculo}}">
+
+
+
+                        </div>
+                        <div class="col-6">
+                            <label class="text-center">PLACA DE VEHICULO</label>
+                            <input class="form-control" type="text" disabled="" value="{{app.placaVehiculo}}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label class="text-center">COLOR DEL VEHICULO</label>
+                            <input class="form-control" type="text" disabled="" value="{{app.colorVehiculo}}">
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-6">
+                            <label class="text-center">NUMERO DE PLAZA</label>
+                            <input class="form-control" type="text" disabled="" value="{{app.plaza}}">
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <h4 class="text-center"><br>CLIENTES REGISTRADOS</h4>
+                    </div>
+
+                    <div class="col-12" >
+                        <table class="table table-striped tabled-dark">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th class="text-center">CEDULA</th>
+                                    <th class="text-center">NOMBRE</th>
+                                    <th class="text-center">TIPO DE VEHICULO</th>
+                                    <th class="text-center">PLACA DE VEHICULO</th>
+                                    <th class="text-center">COLOR DEL VEHICULO</th>
+                                    <th class="text-center">NUMERO DE PLAZA</th>
+                                    <th class="text-center">BOTONES</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="c in app.Cliente">
+                                    <td class="text-center">{{ c.cedula}}</td>
+                                    <td class="text-center">{{ c.nombre}}</td>
+                                    <td class="text-center">{{ c.tipoVehiculo}}</td>
+                                    <td class="text-center">{{ c.placaVehiculo}}</td>
+                                    <td class="text-center">{{ c.colorVehiculo}}</td>
+                                    <td class="text-center">{{ c.plaza}}</td>
+
+                                    <td>
+                                        <button type="button" class="btn btn-outline-dark" ng-click="app.consultarUno(c.cedula)">EDITAR</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            var app = angular.module('demoapp', []);
+            app.controller('appController', ['$http', controladorapp]);
+            function controladorapp($http) {
+                var app = this;
+                app.consultarUno = function (id) {
+                    var parametros = {
+                        proceso: "consultarUno",
+                        cedula: id
+                    };
+                    $http({
+                        method: 'POST',
+                        url: 'peticiones.jsp',
+                        params: parametros
+                    }).then(function (res) {
+                        app.cedula = res.data.Cliente.cedula;
+                        app.nombre = res.data.Cliente.nombre;
+                        app.tipoVehiculo = res.data.Cliente.tipoVehiculo;
+                        app.placaVehiculo = res.data.Cliente.placaVehiculo;
+                        app.colorVehiculo = res.data.Cliente.colorVehiculo;
+                        app.plaza = res.data.Cliente.plaza;
+
+                    });
+                };
+                app.listar = function () {
+                    var parametros = {
+                        proceso: "listar"
+                    };
+                    $http({
+                        method: 'POST',
+                        url: 'peticiones.jsp',
+                        params: parametros
+                    }).then(function (res) {
+                        app.Cliente = res.data.Cliente;
+                    });
+                };
+                app.guardar = function () {
+                    var parametros = {
+                        proceso: "guardar",
+                        cedula: app.cedula,
+                        nombre: app.nombre,
+                        tipoVehiculo: app.tipoVehiculo,
+                        placaVehiculo: app.placaVehiculo,
+                        colorVehiculo: app.colorVehiculo,
+                        plaza: app.plaza
+                    };
+                    $http({
+                        method: 'POST',
+                        url: 'peticiones.jsp',
+                        params: parametros
+                    }).then(function (res) {
+                        if (res.data.ok === true) {//verificamos el ok del proceso
+                            if (res.data.guardar) {//verificamos la ejecucion del proceso
+                                alert('Guardado exitoso');
+                            } else {
+                                alert('Guardado fallido');
+                            }
+                        } else {
+                            alert(res.data.errorMsg);
+                        }
+                    });
+                };
+                app.actualizar = function () {
+                    var paramametros = {
+                        proceso: "actualizar",
+                        cedula: app.cedula,
+                        nombre: app.nombre,
+                        tipoVehiculo: app.tipoVehiculo,
+                        placaVehiculo: app.placaVehiculo,
+                        colorVehiculo: app.colorVehiculo,
+                        plaza: app.plaza
+                    };
+                    $http({
+                        method: 'POST',
+                        url: 'peticiones.jsp',
+                        params: paramametros
+                    }).then(function (res) {
+                        if (res.data.ok === true) {//verifica el ok,peticiones conoce el proceso
+                            if (res.data.actualizar === true) {//verificarmos que el proceso se ejecutó
+                                alert('Actualizó');
+                            } else {
+                                alert('No actualizó');
+                            }
+                        } else {
+                            alert(res.data.errorMsg);
+                        }
+                    });
+                };
+                app.eliminar = function () {
+                    var parametros = {
+                        proceso: "eliminar",
+                        cedula: app.cedula
+                    };
+                    $http({
+                        method: 'POST',
+                        url: 'peticiones.jsp',
+                        params: parametros
+                    }).then(function (res) {
+                        if (res.data.ok === true) {
+                            if (res.data.eliminar === true) {
+                                alert('Eliminó');
+                            } else {
+                                alert('No eliminó');
+                            }
+                        } else {
+                            alert(res.data.errorMsg);
+                        }
+                    });
+
+                };
+
+            }
+        </script>
+    </body>
+</html>

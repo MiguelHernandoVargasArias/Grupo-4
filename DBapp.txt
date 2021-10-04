@@ -1,0 +1,15 @@
+CREATE DATABASE `appDB` /*!40100 DEFAULT CHARACTER SET latin1 COLLATE latin1_spanish_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+
+
+-- appDB.cliente definition
+
+CREATE TABLE `cliente` (
+  `cedula` int NOT NULL,
+  `nombre` varchar(100) COLLATE latin1_spanish_ci NOT NULL,
+  `tipoVehiculo` varchar(100) COLLATE latin1_spanish_ci NOT NULL,
+  `placaVehiculo` varchar(100) COLLATE latin1_spanish_ci NOT NULL,
+  `colorVehiculo` varchar(100) COLLATE latin1_spanish_ci NOT NULL,
+  `plaza` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+
